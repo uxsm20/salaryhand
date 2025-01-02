@@ -57,6 +57,14 @@ body {
     z-index: 9999;
     transition: transform 0.2s;
     transform: translate(-50%, -50%);
+    display: none;
+}
+
+/* Only show cursor effect on desktop/laptop devices */
+@media (min-width: 1024px) {
+  .cursor {
+    display: block;
+  }
 }
 
 /* Background Animation */
