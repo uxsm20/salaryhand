@@ -168,12 +168,22 @@ body {
     font-weight: 600;
 }
 
+.logo-circle {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rotateLogo 10s linear infinite;
+}
+
 .rupee {
     display: inline-block;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
-    color: var(--text-color);
-    animation: rotateLogo 10s linear infinite;
+    color: var(--bg-color);
 }
 
 @keyframes rotateLogo {
