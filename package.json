@@ -1,0 +1,19 @@
+{
+  "name": "salaryhand",
+  "version": "1.0.0",
+  "description": "In-Hand Salary Calculator",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -c-1",
+    "dev": "http-server -c-1"
+  },
+  "keywords": [
+    "salary",
+    "calculator"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}

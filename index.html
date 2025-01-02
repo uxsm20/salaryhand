@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalaryHand • Modern Salary Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="app-container">
+        <div class="background-animation">
+            <div class="gradient-blob"></div>
+            <div class="gradient-blob"></div>
+            <div class="gradient-blob"></div>
+        </div>
+
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32">
+                        <circle cx="16" cy="16" r="16" fill="currentColor" />
+                        <path d="M8 16h16M16 8v16" stroke="var(--bg-color)" stroke-width="2" />
+                    </svg>
+                    <span class="logo-text">salaryhand</span>
+                </div>
+                <div class="theme-toggle">
+                    <button class="theme-btn" aria-label="Toggle theme">
+                        <i class="bi bi-moon-stars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <div class="hero-section">
+                <h1 class="glowing-text">Calculate Your Take-Home Salary</h1>
+                <p class="subtitle">Experience real-time salary breakdown with stunning visualizations</p>
+            </div>
+
+            <div class="calculator-card">
+                <div class="input-section">
+                    <div class="floating-input">
+                        <div class="amount-input">
+                            <label for="ctc">Annual CTC</label>
+                            <div class="input-wrapper">
+                                <span class="currency">₹</span>
+                                <input type="text" id="ctc" placeholder="0" autocomplete="off" inputmode="numeric">
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
+                        <div class="amount-input">
+                            <label for="bonus">Annual Bonus <span class="optional">Optional</span></label>
+                            <div class="input-wrapper">
+                                <span class="currency">₹</span>
+                                <input type="text" id="bonus" placeholder="0" autocomplete="off" inputmode="numeric">
+                                <div class="input-focus-effect"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-container">
+                    <div class="period-toggle">
+                        <button class="toggle-btn active" data-period="monthly">
+                            <span class="btn-bg"></span>
+                            Monthly
+                        </button>
+                        <button class="toggle-btn" data-period="annual">
+                            <span class="btn-bg"></span>
+                            Annual
+                        </button>
+                    </div>
+
+                    <div class="take-home-summary glass-card">
+                        <div class="summary-content">
+                            <h2>Take-Home Salary</h2>
+                            <div class="amount" id="in-hand-salary">₹0</div>
+                            <div class="period-label">Monthly</div>
+                        </div>
+                        <div class="summary-decoration"></div>
+                    </div>
+
+                    <div class="breakdown-grid">
+                        <div class="breakdown-section glass-card">
+                            <h3>
+                                <i class="bi bi-graph-up-arrow"></i>
+                                Salary Components
+                            </h3>
+                            <div class="breakdown-items earnings">
+                                <div class="breakdown-item">
+                                    <div class="item-label">
+                                        <span class="label-text">Basic Salary</span>
+                                        <span class="label-info" data-tooltip="50% of CTC">
+                                            <i class="bi bi-info-circle"></i>
+                                        </span>
+                                    </div>
+                                    <span id="basic-salary" class="item-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <div class="item-label">
+                                        <span class="label-text">HRA</span>
+                                        <span class="label-info" data-tooltip="40% of Basic Salary">
+                                            <i class="bi bi-info-circle"></i>
+                                        </span>
+                                    </div>
+                                    <span id="hra" class="item-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <div class="item-label">
+                                        <span class="label-text">Other Allowances</span>
+                                    </div>
+                                    <span id="other-allowances" class="item-value">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="breakdown-section glass-card">
+                            <h3>
+                                <i class="bi bi-graph-down-arrow"></i>
+                                Deductions
+                            </h3>
+                            <div class="breakdown-items deductions">
+                                <div class="breakdown-item">
+                                    <div class="item-label">
+                                        <span class="label-text">PF Deduction</span>
+                                        <span class="label-info" data-tooltip="12% of Basic, capped at ₹1,800/month">
+                                            <i class="bi bi-info-circle"></i>
+                                        </span>
+                                    </div>
+                                    <span id="pf-deduction" class="item-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <div class="item-label">
+                                        <span class="label-text">Professional Tax</span>
+                                    </div>
+                                    <span id="professional-tax" class="item-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <div class="item-label">
+                                        <span class="label-text">Income Tax</span>
+                                        <span class="label-info" data-tooltip="As per new tax regime">
+                                            <i class="bi bi-info-circle"></i>
+                                        </span>
+                                    </div>
+                                    <span id="income-tax" class="item-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item total-deductions">
+                                    <div class="item-label">
+                                        <span class="label-text">Total Deductions</span>
+                                    </div>
+                                    <span id="total-deductions" class="item-value">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-section glass-card">
+                        <h3>Salary Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="salary-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="glass-card">
+            <div class="container">
+                <p>Built for 🇮🇳 with ❤️</p>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
